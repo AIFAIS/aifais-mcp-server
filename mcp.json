@@ -1,0 +1,139 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/specification/main/schema/mcp.schema.json",
+  "name": "aifais",
+  "displayName": "AIFAIS Document Intelligence",
+  "description": "Headless document processing tools for AI agents. Invoice extraction, contract analysis, and business verification with X402 payments on Solana.",
+  "version": "1.0.0",
+  "author": {
+    "name": "AIFAIS",
+    "email": "info@aifais.com",
+    "url": "https://aifais.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aifais/aifais-mcp-server"
+  },
+  "server": {
+    "type": "remote",
+    "url": "https://aifais.com/api/mcp",
+    "transport": "sse"
+  },
+  "tools": [
+    {
+      "name": "scan_invoice",
+      "description": "Extract structured data from invoices (PDF, JPG, PNG). Returns vendor, amounts, VAT, line items, and KvK numbers. Requires 0.001 SOL payment.",
+      "pricing": {
+        "amount": 0.001,
+        "currency": "SOL",
+        "protocol": "x402"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "invoiceBase64": {
+            "type": "string",
+            "description": "Base64 encoded invoice file"
+          },
+          "mimeType": {
+            "type": "string",
+            "enum": ["image/jpeg", "image/png", "application/pdf"],
+            "description": "MIME type of the file"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Solana transaction signature as payment proof"
+          }
+        },
+        "required": ["invoiceBase64", "mimeType", "signature"]
+      }
+    },
+    {
+      "name": "analyze_contract",
+      "description": "Analyze contracts for risks, unfavorable clauses, and compliance issues. Supports Dutch law context. Requires 0.05 SOL payment.",
+      "status": "coming_soon",
+      "pricing": {
+        "amount": 0.05,
+        "currency": "SOL",
+        "protocol": "x402"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "fileBase64": {
+            "type": "string",
+            "description": "Base64 encoded contract PDF"
+          },
+          "contractType": {
+            "type": "string",
+            "enum": ["nda", "employment", "supplier", "lease", "general"],
+            "description": "Type of contract for specialized analysis"
+          },
+          "focusAreas": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["termination", "liability", "ip", "penalties", "gdpr"]
+            },
+            "description": "Specific areas to focus analysis on"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Solana transaction signature as payment proof"
+          }
+        },
+        "required": ["fileBase64", "signature"]
+      }
+    },
+    {
+      "name": "verify_business",
+      "description": "Verify Dutch businesses via KvK (Chamber of Commerce), BTW (VAT), and bankruptcy registers. Returns trust score and company details. Requires 0.001 SOL payment.",
+      "status": "coming_soon",
+      "pricing": {
+        "amount": 0.001,
+        "currency": "SOL",
+        "protocol": "x402"
+      },
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kvkNumber": {
+            "type": "string",
+            "pattern": "^[0-9]{8}$",
+            "description": "8-digit KvK (Chamber of Commerce) number"
+          },
+          "checks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["kvk", "btw", "bankruptcy"]
+            },
+            "default": ["kvk"],
+            "description": "Which registries to check"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Solana transaction signature as payment proof"
+          }
+        },
+        "required": ["kvkNumber", "signature"]
+      }
+    }
+  ],
+  "payment": {
+    "protocol": "x402",
+    "network": "solana-mainnet",
+    "acceptedCurrencies": ["SOL", "USDC"],
+    "wallet": "Bqpo3emFG46VGLX4korYoeta3a317pWbR2DMbWnFpZ8c"
+  },
+  "tags": [
+    "document-processing",
+    "invoice",
+    "ocr",
+    "contract-analysis",
+    "dutch",
+    "kvk",
+    "x402",
+    "solana",
+    "paid"
+  ]
+}
