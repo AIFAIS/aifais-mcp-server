@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const API_URL = process.env.AIFAIS_API_URL || "https://aifais.com/api/agent/scan";
+const API_URL = process.env.AIFAIS_API_URL || "https://aifais.com/api/v1/scan";
 
 const server = new Server(
     {
