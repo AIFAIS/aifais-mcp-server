@@ -15,7 +15,7 @@
   },
   "server": {
     "type": "remote",
-    "url": "https://aifais.com/api/internal/mcp",
+    "url": "https://aifais.com/api/mcp",
     "transport": "sse"
   },
   "tools": [
