@@ -2,6 +2,8 @@
 
 De officiële Model Context Protocol (MCP) server voor AIFAIS. Geef je AI agents (zoals Claude of Cursor) direct toegang tot specialistische tools voor de Nederlandse markt.
 
+> **Noot:** Deze MCP server is specifiek voor Claude Desktop en Cursor. Andere AI agents kunnen de API [direct aanroepen](https://aifais.mobi/developers/docs#direct-api) via HTTP zonder server.
+
 ## 🚀 Quick Start
 
 ### Voor Claude Desktop
