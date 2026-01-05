@@ -47,28 +47,70 @@ Genereer een PDF factuur op basis van JSON data.
 - `items (array)`
 
 ### `generate_quote` (Gratis)
-Genereer een PDF offerte op basis van JSON data.
-
+Genereer een PDF offerte op basis van JSON data.  
 **Parameters:**
 - `companyName`
 - `clientName`
-- `projectTitle`
 - `items (array)`
 - `validUntil (optional)`
 
 ### `check_contract` (0.001 SOL)
-Analyseer een juridisch contract op risico's.
-
+Analyseer een juridisch contract op risico's.  
 **Parameters:**
 - `contractBase64 (required)`
 - `signature (required, 0.001 SOL)`
 
 ### `generate_terms` (0.001 SOL)
-Genereer algemene voorwaarden op maat.
-
+Genereer algemene voorwaarden op maat.  
 **Parameters:**
 - `companyName`
 - `companyType`
+- `signature (required, 0.001 SOL)`
+
+### `cv_screener` (0.001 SOL)
+Analyseer en score CV's tegen een vacature.
+**Parameters:**
+- `cvBase64 (required)`
+- `mimeType (required)`
+- `jobDescription (required)`
+- `signature (required, 0.001 SOL)`
+
+### `interview_questions` (0.001 SOL)
+Genereer gepersonaliseerde sollicitatievragen.
+**Parameters:**
+- `jobTitle`
+- `jobDescription`
+- `experienceLevel`
+- `questionCount (optional)`
+- `signature (required, 0.001 SOL)`
+
+### `social_planner` (0.001 SOL)
+Genereer een social media planning.
+**Parameters:**
+- `topic`
+- `platforms (array)`
+- `postCount (optional)`
+- `tone (optional)`
+- `signature (required, 0.001 SOL)`
+
+### `lead_scorer` (0.001 SOL)
+Score en prioriteer sales leads.
+**Parameters:**
+- `companyName`
+- `industry`
+- `companySize`
+- `budget`
+- `engagement (object)`
+- `signature (required, 0.001 SOL)`
+
+### `pitch_deck` (0.001 SOL)
+Genereer de structuur en content voor een pitch deck.
+**Parameters:**
+- `companyName`
+- `productService`
+- `targetAudience`
+- `problemSolution`
+- `uniqueValue`
 - `signature (required, 0.001 SOL)`
 
 

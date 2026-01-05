@@ -77,6 +77,125 @@ const TOOLS = {
             required: ["companyName", "companyType", "paymentTerms", "jurisdiction"],
         }
     },
+    generate_quote: {
+        name: "generate_quote",
+        description: "Generates a professional PDF quote. Free tool.",
+        endpoint: "/finance/generate-quote",
+        inputSchema: {
+            type: "object",
+            properties: {
+                companyName: { type: "string" },
+                clientName: { type: "string" },
+                projectTitle: { type: "string" },
+                items: {
+                    type: "array",
+                    items: {
+                        type: "object",
+                        properties: {
+                            description: { type: "string" },
+                            quantity: { type: "number" },
+                            price: { type: "number" },
+                        }
+                    }
+                },
+                validUntil: { type: "number" }
+            },
+            required: ["companyName", "clientName", "projectTitle", "items"],
+        }
+    },
+    cv_screener: {
+        name: "cv_screener",
+        description: "Analyzes and scores a CV against a job description. Requires payment (0.001 SOL).",
+        endpoint: "/hr/cv-screener",
+        inputSchema: {
+            type: "object",
+            properties: {
+                cvBase64: { type: "string", description: "Base64 encoded CV file" },
+                mimeType: { type: "string", description: "MIME type of the file" },
+                jobDescription: { type: "string" },
+                signature: { type: "string", description: "Solana transaction signature" }
+            },
+            required: ["cvBase64", "mimeType", "jobDescription"],
+        }
+    },
+    interview_questions: {
+        name: "interview_questions",
+        description: "Generates personalized interview questions. Requires payment (0.001 SOL).",
+        endpoint: "/hr/interview-questions",
+        inputSchema: {
+            type: "object",
+            properties: {
+                jobTitle: { type: "string" },
+                jobDescription: { type: "string" },
+                experienceLevel: { type: "string", enum: ["junior", "medior", "senior"] },
+                questionCount: { type: "number" },
+                signature: { type: "string", description: "Solana transaction signature" }
+            },
+            required: ["jobTitle", "jobDescription", "experienceLevel"],
+        }
+    },
+    social_planner: {
+        name: "social_planner",
+        description: "Generates social media content plan. Requires payment (0.001 SOL).",
+        endpoint: "/marketing/social-planner",
+        inputSchema: {
+            type: "object",
+            properties: {
+                topic: { type: "string" },
+                platforms: { type: "array", items: { type: "string", enum: ["linkedin", "instagram", "facebook", "twitter", "tiktok"] } },
+                postCount: { type: "number" },
+                tone: { type: "string" },
+                includeHashtags: { type: "boolean" },
+                signature: { type: "string", description: "Solana transaction signature" }
+            },
+            required: ["topic", "platforms"],
+        }
+    },
+    lead_scorer: {
+        name: "lead_scorer",
+        description: "Scores and prioritizes leads. Requires payment (0.001 SOL).",
+        endpoint: "/sales/lead-scorer",
+        inputSchema: {
+            type: "object",
+            properties: {
+                companyName: { type: "string" },
+                industry: { type: "string" },
+                companySize: { type: "string" },
+                budget: { type: "string" },
+                engagement: {
+                    type: "object",
+                    properties: {
+                        websiteVisits: { type: "number" },
+                        emailOpens: { type: "number" },
+                        demoRequested: { type: "boolean" },
+                        downloadedContent: { type: "boolean" }
+                    }
+                },
+                notes: { type: "string" },
+                signature: { type: "string", description: "Solana transaction signature" }
+            },
+            required: ["companyName", "industry", "companySize"],
+        }
+    },
+    pitch_deck: {
+        name: "pitch_deck",
+        description: "Generates a pitch deck structure. Requires payment (0.001 SOL).",
+        endpoint: "/sales/pitch-deck",
+        inputSchema: {
+            type: "object",
+            properties: {
+                companyName: { type: "string" },
+                productService: { type: "string" },
+                targetAudience: { type: "string" },
+                problemSolution: { type: "string" },
+                uniqueValue: { type: "string" },
+                askAmount: { type: "string" },
+                slideCount: { type: "number" },
+                signature: { type: "string", description: "Solana transaction signature" }
+            },
+            required: ["companyName", "productService", "targetAudience", "problemSolution", "uniqueValue"],
+        }
+    },
     create_invoice: {
         name: "create_invoice",
         description: "Generates a professional PDF invoice. Free tool.",
